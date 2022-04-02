@@ -8,14 +8,21 @@ body {
     width: 850px;
 }
 
-p {
+.description {
     font-size: 20px;
     text-align: justify;
 }
 
 #start-btn {
     width: 100%;
+    padding-bottom: 5px;
 }
+
+#stats-btn {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
 
 #start-page {
     height: 100%;
@@ -23,4 +30,34 @@ p {
     flex-direction: column;
     justify-content: top;  
     align-items: center;  
+}
+
+#js-progress {
+    width: 100%;
+    padding: 5px;
+    height: 30px;
+}
+
+#wasm-progress {
+    width: 100%;
+    padding: 5px;
+    height: 30px;
+}
+
+#js-progress-container {
+    width: 100%;
+    padding: 0;
+    margin-top: 30px;
+    font-size: 30px;
+    text-align: center;
+    height: 30px;
+}
+
+#wasm-progress-container {
+    width: 100%;
+    padding: 0;
+    margin-top: 30px;
+    font-size: 30px;
+    text-align: center;
+    height: 30px;
 }
