@@ -2,6 +2,14 @@
 
 source /home/somin/emsdk/emsdk_env.sh
 
-emcc -lembind -o main.js main.cpp -sMODULARIZE -s 'EXPORT_NAME="createWasmBench"'
+emcc -lembind \
+     -o index.js \
+     index.cpp \
+     bible.cpp \
+     tests.cpp \
+     md5.cpp \
+     -sMODULARIZE \
+     -s 'EXPORT_NAME="createWasmBench"' \
+     -O3
 
 python3 -m http.server
