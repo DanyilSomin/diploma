@@ -8,7 +8,7 @@ const JSmd5Test = () => {
 }
 
 const JSarrayOperationsTest = () => {
-    const testSize = 200000
+    const testSize = 30_000
 
     const start = window.performance.now()
 
@@ -25,7 +25,7 @@ const JSarrayOperationsTest = () => {
 }
 
 const JSbubbleSort = () => {
-    const LEN = 10_000
+    const LEN = 30_000
     let arr = []
     for (let i = 0; i < LEN; ++i) {
         arr[i] = Math.random()
@@ -39,7 +39,6 @@ const JSbubbleSort = () => {
                 const temp = arr[j]
                 arr[j] = arr[j - 1]
                 arr[j - 1] = temp
-                //[arr[j], arr[j - 1]] = [arr[j - 1], arr[j]]
             }
         }
     }
@@ -52,7 +51,7 @@ const JSbubbleSort = () => {
 const JSfindPrimeTest = () => {
     const start = performance.now();
 
-    const LEN = 10_000
+    const LEN = 20_000
     
     let currentNumber = 0
     let primesAmount = 0

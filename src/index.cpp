@@ -4,12 +4,8 @@
 
 using namespace emscripten;
 
-int getInt() {
-    return 100;
-}
-
 EMSCRIPTEN_BINDINGS(diploma_module) {
-    function("getInt", &getInt);
+    function("findPrimeTest", &findPrimeTest);
     function("bubbleSortTest", &bubbleSortTest);
     function("arrayOperationsTest", &arrayOperationsTest);
     function("md5Test", &md5Test);

@@ -6,11 +6,6 @@
   <script src="bible.js"></script>
   <script src="index.js"></script>
   <script src="tests.js"></script>
-  <script>
-    createWasmBench().then(function(Module) {
-        console.log('module result: ' + Module.getInt());
-    });
-  </script>
 
   <body>
     <div id="start-page">
@@ -43,8 +38,8 @@
       </div>
 
       <div id="results-container" style="display: none;">
-        <div><h1 id="js-mark-text" style="color: rgb(255, 200, 0);">JS result: 25</h1></div>
-        <div><h1 id="wasm-mark-test" style="color: rgb(0, 170, 255);">WASM result: 26</h1></div>
+        <div><p id="js-mark-text" style="color: rgb(255, 200, 0);">JS result: 25</p></div>
+        <div><p id="wasm-mark-text" style="color: rgb(0, 170, 255);">WASM result: 26</p></div>
       </div>
 
       <button type="button" id="stats-btn" class="btn btn-primary btn-lg" style="display: none;">All results</button>

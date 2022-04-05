@@ -12,7 +12,7 @@ float bubbleSortTest()
 {
     srand(time(0));
 
-    static constexpr int LEN = 10'000;
+    static constexpr int LEN = 30'000;
     float arr[LEN];
     for (int i = 0; i < LEN; ++i)
     {
@@ -45,7 +45,7 @@ float arrayOperationsTest()
 
     const auto start = std::chrono::steady_clock::now();
 
-    static constexpr int LEN = 10'000;
+    static constexpr int LEN = 30'000;
     std::vector<int> vec;
     vec.reserve(LEN);
 
@@ -81,7 +81,7 @@ float findPrimeTest()
 {
     const auto start = std::chrono::steady_clock::now();
 
-    static constexpr int LEN = 10'000;
+    static constexpr int LEN = 20'000;
     
     int currentNumber = 0;
     int primesAmount = 0;
