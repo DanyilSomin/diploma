@@ -14,31 +14,28 @@ createWasmBench().then(function(Module) {
     WASM = Module
 })
 
-startBtn.addEventListener('click', async () => {
-    startBtn.style.display = "none"
-    jsProgressContainer.style.display = "block"
-    wasmProgressContainer.style.display = "block"
-    jsProgress.style.width = "1%"
-    wasmProgress.style.width = "1%"
-    wasmProgress.style.transition.width = "0"
-
+const doJSTest = async () => {
     const jsTests = [ JSarrayOperationsTest, JSbubbleSort, JSfindPrimeTest, JSmd5Test,
-                JSmd5Test, JSarrayOperationsTest, JSbubbleSort, JSfindPrimeTest,
-                JSfindPrimeTest, JSmd5Test, JSarrayOperationsTest, JSbubbleSort,
-                JSbubbleSort, JSfindPrimeTest, JSmd5Test, JSarrayOperationsTest ]
-
-    await waitForUpdate()
-
-    let jsTime = 0
-    for (let i = 0; i < jsTests.length; ++i) {
-        await (jsTime += jsTests[i]())
-        jsProgress.style.width = ((i + 1) / jsTests.length * 100) + '%'
+        JSmd5Test, JSarrayOperationsTest, JSbubbleSort, JSfindPrimeTest,
+        JSfindPrimeTest, JSmd5Test, JSarrayOperationsTest, JSbubbleSort,
+        JSbubbleSort, JSfindPrimeTest, JSmd5Test, JSarrayOperationsTest ]
 
         await waitForUpdate()
-    }
+
+        let jsTime = 0
+        for (let i = 0; i < jsTests.length; ++i) {
+            await (jsTime += jsTests[i]())
+            jsProgress.style.width = ((i + 1) / jsTests.length * 100) + '%'
+
+            await waitForUpdate()
+        }
 
     jsProgress.style.width = "100%"
 
+    return jsTime
+}
+
+const doWASMTest = async () => {
     const wasmTests = [ WASM.arrayOperationsTest, WASM.bubbleSortTest, WASM.findPrimeTest, WASM.md5Test,
         WASM.md5Test, WASM.arrayOperationsTest, WASM.bubbleSortTest, WASM.findPrimeTest,
         WASM.findPrimeTest, WASM.md5Test, WASM.arrayOperationsTest, WASM.bubbleSortTest,
@@ -51,6 +48,20 @@ startBtn.addEventListener('click', async () => {
 
         await waitForUpdate()
     }
+
+    return wasmTime
+}
+
+startBtn.addEventListener('click', async () => {
+    startBtn.style.display = "none"
+    jsProgressContainer.style.display = "block"
+    wasmProgressContainer.style.display = "block"
+    jsProgress.style.width = "1%"
+    wasmProgress.style.width = "1%"
+    wasmProgress.style.transition.width = "0"
+    
+    const jsTime = await doJSTest()
+    const wasmTime = await doWASMTest()
 
     jsProgressContainer.style.display = "none"
     wasmProgressContainer.style.display = "none"
