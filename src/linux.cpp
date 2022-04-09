@@ -5,7 +5,6 @@
 
 #include "tests.h"
 
-
 extern std::string bible;
 
 const std::array<const std::function<float(void)>, 16> tests
@@ -24,5 +23,5 @@ int main()
         time += tests[i]();
     }
 
-    std::cout << time << '\n';
+    std::cout << time  << " " << bible.size() << '\n';
 }

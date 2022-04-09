@@ -8,7 +8,7 @@ const wasmMarkText = document.querySelector("#wasm-mark-text")
 const resultsContainer = document.querySelector("#results-container")
 
 const markByTime = (time) => {
-    return Math.round(Math.pow(1 / time, 0.8) * 1_000_000);
+    return Math.round(Math.pow(1 / time, 0.8) * 10_000_000);
 }
 
 const waitForUpdate = () => new Promise(r => requestAnimationFrame(r))
@@ -48,7 +48,6 @@ const doWASMTest = async () => {
         WASM.bubbleSortTest, WASM.findPrimeTest, WASM.md5Test, WASM.arrayOperationsTest ]
 
     let wasmTime = 0
-    console.log(wasmTime)
     for (let i = 0; i < wasmTests.length; ++i) {
         wasmTime += wasmTests[i]()
         wasmProgress.style.width = ((i + 1) / wasmTests.length * 100) + '%'

@@ -1,5 +1,5 @@
-build
-build/*
+./build
+./build/*
 *.wasm
 *.out
 src/index.js
