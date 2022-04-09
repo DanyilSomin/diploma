@@ -2,4 +2,4 @@
 ./build/*
 *.wasm
 *.out
-src/index.js
+public/index.js

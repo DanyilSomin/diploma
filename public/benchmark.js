@@ -2,9 +2,11 @@ const startBtn = document.querySelector("#start-btn")
 const jsProgressContainer = document.querySelector("#js-progress-container")
 const jsProgress = document.querySelector("#js-progress")
 const jsMarkText = document.querySelector("#js-mark-text")
+const jsHintText = document.querySelector("#js-hint-text")
 const wasmProgressContainer = document.querySelector("#wasm-progress-container")
 const wasmProgress = document.querySelector("#wasm-progress")
 const wasmMarkText = document.querySelector("#wasm-mark-text")
+const wasmHintText = document.querySelector("#wasm-hint-text")
 const resultsContainer = document.querySelector("#results-container")
 
 const markByTime = (time) => {
@@ -74,5 +76,7 @@ startBtn.addEventListener('click', async () => {
 
     resultsContainer.style.display = "flex"
     jsMarkText.innerHTML = "Js: " + markByTime(jsTime)
+    jsHintText.innerHTML = "(" + Math.round(jsTime) + " ms" + ")"
     wasmMarkText.innerHTML = "WASM: " + markByTime(wasmTime)
+    wasmHintText.innerHTML = "(" + Math.round(wasmTime) + " ms" + ")"
 })
