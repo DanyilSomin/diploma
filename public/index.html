@@ -23,16 +23,20 @@
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/UAParser.js/1.0.2/ua-parser.min.js" integrity="sha512-M/6+/Ib+r5t/hijvSPLPO76abBzT8vlMVRSJ16JDA+NV9CGCkAjq8UD4kHN6KpHncDTRRIb0oUU01yhW+yfqng==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>    
     <script src="bible.js"></script>
     <script src="index.js"></script>
     <script src="tests.js"></script>
-    <script src="https://theapicompany.com/deviceAPI.js"></script>
   </head>
 
 
   <body>
     <script>
-      alert(deviceAPI)
+      const uap = new UAParser(navigator.userAgent)
+      // alert(UAParser)
+      // alert(WURFL.form_factor)
+      // alert(WURFL.is_mobile)
+      alert(JSON.stringify(uap.getResult()))  
     </script>
 
     <div id="start-page">
