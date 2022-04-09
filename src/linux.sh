@@ -3,6 +3,7 @@
 mkdir ../build
 
 g++  -o ../build/a.out \
+     -std=c++17 \
      linux.cpp \
      tests.cpp \
      bible.cpp \
