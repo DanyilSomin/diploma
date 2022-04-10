@@ -79,4 +79,27 @@ startBtn.addEventListener('click', async () => {
     jsHintText.innerHTML = "(" + Math.round(jsTime) + " ms" + ")"
     wasmMarkText.innerHTML = "WASM: " + markByTime(wasmTime)
     wasmHintText.innerHTML = "(" + Math.round(wasmTime) + " ms" + ")"
+
+    const ua = new UAParser(navigator.userAgent).getResult()
+
+    console.log(ua)
+
+    var xmlHttp = new XMLHttpRequest()
+    url = "https://somin-dipl-2022.web.app/registerMarks"
+        + "?arch=" + (ua.cpu.architecture ? ua.cpu.architecture : "no_info")
+        + "&browser=" + (ua.browser.name ? ua.browser.name : "no_info")
+        + "&browserversion=" + (ua.browser.version ? ua.browser.version : "no_info")
+        + "&jstimems=" + (Math.round(jsTime) ? Math.round(jsTime) : "no_info")
+        + "&wasmtimems=" + (Math.round(wasmTime) ? Math.round(wasmTime) : "no_info")
+        + "&jsmark=" + (markByTime(jsTime) ? markByTime(jsTime) : "no_info")
+        + "&wasmmark=" + (markByTime(wasmTime) ? markByTime(wasmTime) : "no_info")
+        + "&model=" + (ua.device.model ? ua.device.model : "no_info")
+        + "&os=" + (ua.os.name ? ua.os.name : "no_info")
+        + "&osversion=" + (ua.os.version ? ua.os.version : "no_info")
+        + "&vendor=" + (ua.device.vendor ? ua.device.vendor : "no_info")
+
+    console.log(url)
+
+    xmlHttp.open("GET", url)
+    xmlHttp.send()
 })

@@ -5,10 +5,19 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
+    ],
+    "rewrites": [ {
+      "source": "/registerMarks",
+      "function": "registerMarks"
+    } ]
   },
   "firestore": {
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
+  },
+  "functions": {
+    "predeploy": [
+    ],
+    "source": "functions"
   }
 }
