@@ -27,11 +27,12 @@
     <script src="bible.js"></script>
     <script src="index.js"></script>
     <script src="tests.js"></script>
+    <script src="table.js"></script>
   </head>
 
 
   <body>
-    <div id="start-page">
+    <div id="start-page" style="display: none;">
       <h1 style="text-align: center;">JS/WASM benchmark</h1>
 
       <p class="description">
@@ -68,6 +69,45 @@
       </div>
 
       <button type="button" id="stats-btn" class="btn btn-primary btn-lg" style="display: none;">All results</button>
+    </div>
+
+    <div id="table-page" style="display: block;">
+      <table id="table" class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Date</th>
+            <th scope="col">JS mark</th>
+            <th scope="col">JS time</th>
+            <th scope="col">WASM mark</th>
+            <th scope="col">WASM time</th>
+            <th scope="col">Browser</th>
+            <th scope="col">Browser version</th>
+            <th scope="col">OS</th>
+            <th scope="col">OS version</th>
+            <th scope="col">Vendor</th>
+            <th scope="col">Model</th>
+            <th scope="col">Arch</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>1</th>
+            <td>wefwefwefwef</td>
+            <td>4428</td>
+            <td>15566</td>
+            <td>47125</td>
+            <td>1111</td>
+            <td>Edge</td>
+            <td>99.0.11.50.55</td>
+            <td>Windows</td>
+            <td>10</td>
+            <td>no_info</td>
+            <td>no_info</td>
+            <td>amd64</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <script src="benchmark.js"></script>

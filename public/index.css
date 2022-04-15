@@ -5,6 +5,9 @@ html {
 body {
     margin: 2% auto;
     height: 96%;
+}
+
+#start-page {
     width: 850px;
 }
 

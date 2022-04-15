@@ -5,18 +5,17 @@ const cors = require('cors')({origin: true})
 admin.initializeApp()
 
 exports.getMarks = functions.https.onRequest(async (req, res) => {
-    const result = await admin.firestore().collection('benchmarks').limitToLast(100).get()
+    const result = await admin.firestore()
+                              .collection("benchmarks")
+                              .orderBy("date", "desc")
+                              .limitToLast(100).get()
 
     let response = []
     result.forEach(doc => {
         response.push(doc.data())
     })   
 
-    return res.send( { 'benchmark1s' : response } )
-})
-
-exports.echo = functions.https.onRequest(async (req, res) => {
-
+    return res.send( { response } )
 })
 
 exports.registerMarks = functions.https.onRequest(async (req, res) => {
@@ -31,7 +30,8 @@ exports.registerMarks = functions.https.onRequest(async (req, res) => {
         "os" : req.query.os,
         "osversion" : req.query.osversion,
         "vendor" : req.query.vendor,
-        "wasmmark" : req.query.wasmmark
+        "wasmmark" : req.query.wasmmark,
+        "wasmtimems" : req.query.wasmtime
     })
 
     res.json({ "OK" : "OK" })

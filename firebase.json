@@ -9,6 +9,9 @@
     "rewrites": [ {
       "source": "/registerMarks",
       "function": "registerMarks"
+    } , {
+      "source": "/getMarks",
+      "function": "getMarks"
     } ]
   },
   "firestore": {
