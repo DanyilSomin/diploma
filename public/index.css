@@ -3,11 +3,11 @@ html {
 }
 
 body {
-    margin: 2% auto;
     height: 96%;
 }
 
 #start-page {
+    margin: 2% auto;
     width: 850px;
 }
 
@@ -87,8 +87,11 @@ body {
 
 @media screen and (max-width: 850px) {
     body {
-        margin: 2% auto;
         height: 96%;
+    }
+    
+    #start-page {
+        margin: 2% auto;
         width: 96%;
     }
     

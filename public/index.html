@@ -32,7 +32,7 @@
 
 
   <body>
-    <div id="start-page" style="display: none;">
+    <div id="start-page">
       <h1 style="text-align: center;">JS/WASM benchmark</h1>
 
       <p class="description">
@@ -71,7 +71,7 @@
       <button type="button" id="stats-btn" class="btn btn-primary btn-lg" style="display: none;">All results</button>
     </div>
 
-    <div id="table-page" style="display: block;">
+    <div id="table-page" style="display: none;">
       <table id="table" class="table table-striped table-hover">
         <thead>
           <tr>
@@ -90,22 +90,7 @@
             <th scope="col">Arch</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <th>1</th>
-            <td>wefwefwefwef</td>
-            <td>4428</td>
-            <td>15566</td>
-            <td>47125</td>
-            <td>1111</td>
-            <td>Edge</td>
-            <td>99.0.11.50.55</td>
-            <td>Windows</td>
-            <td>10</td>
-            <td>no_info</td>
-            <td>no_info</td>
-            <td>amd64</td>
-          </tr>
+        <tbody id="tablebody">
         </tbody>
       </table>
     </div>

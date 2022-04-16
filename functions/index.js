@@ -31,7 +31,7 @@ exports.registerMarks = functions.https.onRequest(async (req, res) => {
         "osversion" : req.query.osversion,
         "vendor" : req.query.vendor,
         "wasmmark" : req.query.wasmmark,
-        "wasmtimems" : req.query.wasmtime
+        "wasmtimems" : req.query.wasmtimems
     })
 
     res.json({ "OK" : "OK" })
