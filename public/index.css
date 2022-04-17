@@ -11,6 +11,11 @@ body {
     width: 850px;
 }
 
+#stats-btn {
+    margin-top: 40px;
+    width: 30%;
+}
+
 .description {
     font-size: 20px;
     text-align: justify;
@@ -167,5 +172,10 @@ body {
         font-weight: bold;
         font-size: 2.5em;
         margin-bottom: 0;
+    }
+
+    #stats-btn {
+        margin-top: 30px;
+        width: 100%;
     }
 }
