@@ -1,4 +1,5 @@
 const startBtn = document.querySelector("#start-btn")
+const statsBtn = document.querySelector("#stats-btn")
 const jsProgressContainer = document.querySelector("#js-progress-container")
 const jsProgress = document.querySelector("#js-progress")
 const jsMarkText = document.querySelector("#js-mark-text")
@@ -98,8 +99,8 @@ startBtn.addEventListener('click', async () => {
         + "&osversion=" + (ua.os.version ? ua.os.version : "no_info")
         + "&vendor=" + (ua.device.vendor ? ua.device.vendor : "no_info")
 
-    console.log(url)
-
     xmlHttp.open("GET", url)
     xmlHttp.send()
+
+    statsBtn.style.display = "block"
 })

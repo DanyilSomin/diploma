@@ -22,7 +22,7 @@ const showTable = () => {
             tr.appendChild(rowCol)
 
             const dateCol = document.createElement("td")
-            dateCol.innerHTML = element.date
+            dateCol.innerHTML = new Date(element.date).toLocaleDateString("uk-UA")
             tr.appendChild(dateCol)
 
             const jsMarkCol = document.createElement("td")
@@ -71,6 +71,8 @@ const showTable = () => {
 
             const table = document.querySelector("#tablebody")
             table.appendChild(tr)
+
+            rowNumber += 1
         });
     }
 
