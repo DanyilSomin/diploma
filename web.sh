@@ -12,4 +12,4 @@ emcc -lembind \
      -s 'EXPORT_NAME="createWasmBench"' \
      -O3
 
-# python3 -m http.server 8888 --bind 0.0.0.0 --directory ./src
+python3 -m http.server 8888 --bind 0.0.0.0 --directory ./public

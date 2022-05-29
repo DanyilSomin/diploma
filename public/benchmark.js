@@ -1,5 +1,7 @@
 const startBtn = document.querySelector("#start-btn")
 const statsBtn = document.querySelector("#stats-btn")
+const downloadBtn = document.querySelector("#download-btn")
+const descriptionBtn = document.querySelector("#description-btn")
 const jsProgressContainer = document.querySelector("#js-progress-container")
 const jsProgress = document.querySelector("#js-progress")
 const jsMarkText = document.querySelector("#js-mark-text")
@@ -103,4 +105,6 @@ startBtn.addEventListener('click', async () => {
     xmlHttp.send()
 
     statsBtn.style.display = "block"
+    downloadBtn.style.display = "block"
+    descriptionBtn.style.display = "block"
 })

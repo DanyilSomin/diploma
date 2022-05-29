@@ -33,6 +33,18 @@ body {
     font-size: 30;
 }
 
+#download-btn {
+    width: 30%;
+    margin-bottom: 15px;
+    font-size: 30;
+}
+
+#description-btn {
+    width: 30%;
+    margin-bottom: 15px;
+    font-size: 30;
+}
+
 #start-page {
     height: 100%;
     display: flex;  
@@ -176,6 +188,17 @@ body {
 
     #stats-btn {
         margin-top: 30px;
+        width: 100%;
+    }
+
+    #download-btn {
+        margin-top: 3px;
+        width: 100%;
+    }
+
+    #description-btn {
+        margin-top: 3px;
+        margin-bottom: 5px;
         width: 100%;
     }
 }
