@@ -1,14 +1,22 @@
+let inited = false;
+
 const showTable = () => {
     var xmlHttp = new XMLHttpRequest()
     url = "https://somin-dipl-2022.web.app/getMarks"
 
-    //xmlHttp.responseType = 'json'
     xmlHttp.onload = () => {
         const startPage = document.querySelector("#start-page")
         const tablePage = document.querySelector("#table-page")
+        const homeImg = document.querySelector("#home-img")
+        const infoPage = document.querySelector("#info-page")
 
         startPage.style.display = "none"
         tablePage.style.display = "block"
+        homeImg.style.display = "block"
+        infoPage.style.display = "none"
+
+        if (inited) return 
+        else inited = true
 
         let responseObj = JSON.parse(xmlHttp.response)
         console.log(responseObj)
@@ -74,6 +82,66 @@ const showTable = () => {
 
             rowNumber += 1
         });
+    }
+
+    xmlHttp.open("GET", url)
+    xmlHttp.send()
+}
+
+const doDownload = () => {
+    var xmlHttp = new XMLHttpRequest()
+    url = "https://somin-dipl-2022.web.app/getMarks"
+
+    xmlHttp.onload = () => {
+        let responseObj = JSON.parse(xmlHttp.response)
+
+        let resStr = "Date, JS Mark, JS Time ms, WASM Mark, WASM Time ms, Browser, Browser version, OS, OS version, Vendor, Model, Arch, \n"
+
+        responseObj.response.forEach(element => {
+            resStr += element.date
+            resStr += ","
+
+            resStr += element.jsmark
+            resStr += ","
+            
+            resStr += element.jstimems
+            resStr += ","
+
+            resStr += element.wasmmark
+            resStr += ","
+
+            resStr += element.wasmtimems
+            resStr += ","
+            
+            resStr += element.browser
+            resStr += ","
+            
+            resStr += element.browserversion
+            resStr += ","
+
+            resStr += element.os
+            resStr += ","
+            
+            resStr +=  element.osversion
+            resStr += ","
+            
+            resStr +=  element.vendor
+            resStr += ","
+            
+            resStr +=  element.model
+            resStr += ","
+            
+            resStr +=  element.arch
+            resStr += ","
+
+            resStr += "\n"
+        });
+
+        var bb = new Blob([resStr ], { type: 'text/plain' })
+        var a = document.createElement('a')
+        a.download = 'stats.csv'
+        a.href = window.URL.createObjectURL(bb)
+        a.click() 
     }
 
     xmlHttp.open("GET", url)

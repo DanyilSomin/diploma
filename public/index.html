@@ -30,15 +30,15 @@
     <script src="table.js"></script>
   </head>
 
-
   <body>
-    <div id="start-page">
+    <div id="start-page" style="display: flex;">
       <h1 style="text-align: center;">JS/WASM benchmark</h1>
 
       <p class="description">
         &emsp;This is "js vs wasm" benchmark app. 
         The main purpose is to collect statistics about WASM implementation performance comparing to JS implementation for different platforms.
-        This data can help developers to examine current state of WASM and make a decision use or not to use WASM.
+        This data can help developers to examine current state of WASM and make a decision use or not to use WASM or WASM users to compare and 
+        test their systems, different browsers and settings.
       </p>
 
       <button type="button" id="start-btn" class="btn btn-primary btn-lg">Start</button>
@@ -69,8 +69,8 @@
       </div>
 
       <button type="button" onclick="showTable()" id="stats-btn" class="btn btn-primary btn-lg" style="display: none;">All results</button>
-      <button type="button" onclick="showTable()" id="download-btn" class="btn btn-primary btn-lg" style="display: none;">Download results</button>
-      <button type="button" onclick="showTable()" id="description-btn" class="btn btn-primary btn-lg" style="display: none;">See description</button>
+      <button type="button" onclick="doDownload()" id="download-btn" class="btn btn-primary btn-lg" style="display: none;">Download results</button>
+      <button type="button" onclick="showInfo()" id="description-btn" class="btn btn-primary btn-lg" style="display: none;">See description</button>
     </div>
 
     <div id="table-page" style="display: none;">
@@ -96,6 +96,255 @@
         </tbody>
       </table>
     </div>
+
+    <div id="info-page" style="display: none;">
+      <h1 style="text-align: center;">Detailed description of tests and analysis and evaluation</h1>
+
+      <p class="description">
+        &emsp;To obtain an evaluation, the application performs a set of performance tests for JavaScript and WebAssembly.
+        Each of the sets consists of all possible permutations of the four performance tests.<br>
+        &emsp;As mentioned above, the application uses two tests to test performance
+        (one for WASM one for JavaScript) each of the four types.<br>
+        &emsp;Type 1. Test of simple arithmetic calculations. The subroutine in the forehead looks for a prime number numbered N.<br>
+        &emsp;JS Code:</p>
+
+        <pre><code>
+          const JSfindPrimeTest = () =&gt; {
+            const start = performance.now();
+        
+            const LEN = 20_000
+            
+            let currentNumber = 0
+            let primesAmount = 0
+            while (primesAmount &lt; LEN)
+            {
+                currentNumber += 1
+        
+                let prime = true
+                const searchUntil = currentNumber / 2 + 1
+                for (let i = 2; i &lt; searchUntil; ++i)
+                {
+                    if (currentNumber % i == 0)
+                    {
+                        prime = false
+                        break
+                    }
+                }
+        
+                if (prime)
+                    primesAmount += 1
+            }
+        
+            const end = performance.now()
+        
+            return end - start
+        }
+        </pre></code>
+        <p class="description">&emsp;C++ Code:</p>
+        <pre><code>
+          float findPrimeTest()
+          {
+              const auto start = std::chrono::steady_clock::now();
+
+              static constexpr int LEN = 20'000;
+              
+              int currentNumber = 0;
+              int primesAmount = 0;
+              while (primesAmount &lt; LEN)
+              {
+                  currentNumber += 1;
+
+                  bool prime = true;
+                  const auto searchUntil = currentNumber / 2 + 1;
+                  for (int i = 2; i &lt; searchUntil; ++i)
+                  {
+                      if (currentNumber % i == 0)
+                      {
+                          prime = false;
+                          break;
+                      }
+                  }
+
+                  if (prime)
+                      primesAmount += 1;
+              }
+
+              const auto end = std::chrono::steady_clock::now();
+
+              return std::chrono::duration_cast&lt;std::chrono::nanoseconds&gt;(end - start).count() / 1'000'000.0;
+          }
+        </pre></code>
+
+        <p class="description">&emsp;Type 2. Test of calculations along with memory read. The subroutine calculates md5 hash for long string.<br>
+        &emsp;JS Code:</p>
+        <pre><code>
+          const JSmd5Test = () =&gt; {
+            const start = window.performance.now()
+        
+            const bibleHash = md5(bible)
+        
+            const end = window.performance.now()
+            
+            return end - start
+          }
+        </pre></code>
+        <p class="description">&emsp;C++ Code:</p>
+        <pre><code>
+          float md5Test()
+          {
+              extern std::string bible;
+
+              const auto start = std::chrono::steady_clock::now();
+
+              const auto md5Str = md5(bible);
+
+              const auto end = std::chrono::steady_clock::now();
+
+              return std::chrono::duration_cast&lt;std::chrono::nanoseconds&gt;(end - start).count() / 1'000'000.0;
+          }</pre></code>
+        <p class="description">&emsp;Note: I used the fastest MD5 algirithms implementations that I found written using pure JS and C++. No libraries.<br>
+        <br>&emsp;Type 3. Test of memory read/write. The subroutine performs bubble sort on random data.<br>
+        &emsp;JS Code:</p>
+        <pre><code>
+          const JSarrayOperationsTest = () =&gt; {
+            const testSize = 30_000
+        
+            const start = window.performance.now()
+        
+            let arr = [];
+            for (let i = 0; i float bubbleSortTest()
+            {
+                srand(time(0));
+            
+                static constexpr int LEN = 30'000;
+                float arr[LEN];
+                for (int i = 0; i &lt; LEN; ++i)
+                {
+                    arr[i] = rand() / (float)RAND_MAX;
+                }
+            
+                const auto start = std::chrono::steady_clock::now();
+            
+                for (int i = 0; i &lt; LEN; ++i)
+                {
+                    for (int j = i + 1; j &lt; LEN; ++j)
+                    {
+                        if (arr[j] &lt; arr[j - 1])
+                        {
+                            int temp = arr[j];
+                            arr[j] = arr[j - 1];
+                            arr[j - 1] = temp;
+                        }
+                    }
+                }
+            
+                const auto end = std::chrono::steady_clock::now();
+            
+                return std::chrono::duration_cast&lt;std::chrono::nanoseconds&gt;(end - start).count() / 1'000'000.0;
+            }
+             testSize; ++i)
+                arr.push(Math.random())
+        
+            arr.sort()
+        
+            const sum = arr.reduce((partialSum, a) =&gt; partialSum + a, 0)
+        
+            const end = window.performance.now()
+            return end - start
+          }
+        </pre></code>
+        <p class="description">&emsp;C++ Code:</p>
+        <pre><code>
+          float arrayOperationsTest()
+          {
+              srand(time(0));
+
+              const auto start = std::chrono::steady_clock::now();
+
+              static constexpr int LEN = 30'000;
+              std::vector&lt;int&gt; vec;
+              vec.reserve(LEN);
+
+              std::generate_n(std::back_inserter(vec), LEN, []() { return rand(); });
+
+              std::sort(vec.begin(), vec.end());
+
+              int sum = 0;
+              for (auto n : vec)
+                  sum += n;
+
+              if (!sum) return 0;
+
+              const auto end = std::chrono::steady_clock::now();
+
+              return std::chrono::duration_cast&lt;std::chrono::nanoseconds&gt;(end - start).count() / 1'000'000.0;
+          }
+        </pre></code>
+        <p class="description">&emsp;Type 4. Array operations. Array operations written in C style.<br>
+        &emsp;JS Code:</p>
+        <pre><code>
+          const JSbubbleSort = () =&gt; {
+            const LEN = 30_000
+            let arr = []
+            for (let i = 0; i &lt; LEN; ++i) {
+                arr[i] = Math.random()
+            }
+        
+            const start = performance.now()
+        
+            for (let i = 0; i &lt; LEN; ++i) {
+                for (let j = i + 1; j &lt; LEN; ++j) {
+                    if (arr[j] &lt; arr[j - 1]) {
+                        const temp = arr[j]
+                        arr[j] = arr[j - 1]
+                        arr[j - 1] = temp
+                    }
+                }
+            }
+        
+            const end = performance.now()
+        
+            return end - start
+          }
+        </pre></code>
+        <p class="description">&emsp;C++ Code:</p>
+        <pre><code>
+          float bubbleSortTest()
+          {
+              srand(time(0));
+
+              static constexpr int LEN = 30'000;
+              float arr[LEN];
+              for (int i = 0; i &lt; LEN; ++i)
+              {
+                  arr[i] = rand() / (float)RAND_MAX;
+              }
+
+              const auto start = std::chrono::steady_clock::now();
+
+              for (int i = 0; i &lt; LEN; ++i)
+              {
+                  for (int j = i + 1; j &lt; LEN; ++j)
+                  {
+                      if (arr[j] &lt; arr[j - 1])
+                      {
+                          int temp = arr[j];
+                          arr[j] = arr[j - 1];
+                          arr[j - 1] = temp;
+                      }
+                  }
+              }
+
+              const auto end = std::chrono::steady_clock::now();
+
+              return std::chrono::duration_cast&lt;std::chrono::nanoseconds&gt;(end - start).count() / 1'000'000.0;
+          }
+        </pre></code>
+      </p>
+    </div>
+
+
+    <img id="home-img" src="home.png"/>
 
     <script src="benchmark.js"></script>
 </body>

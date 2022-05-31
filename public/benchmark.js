@@ -2,6 +2,7 @@ const startBtn = document.querySelector("#start-btn")
 const statsBtn = document.querySelector("#stats-btn")
 const downloadBtn = document.querySelector("#download-btn")
 const descriptionBtn = document.querySelector("#description-btn")
+const homeImg = document.querySelector("#home-img")
 const jsProgressContainer = document.querySelector("#js-progress-container")
 const jsProgress = document.querySelector("#js-progress")
 const jsMarkText = document.querySelector("#js-mark-text")
@@ -11,6 +12,34 @@ const wasmProgress = document.querySelector("#wasm-progress")
 const wasmMarkText = document.querySelector("#wasm-mark-text")
 const wasmHintText = document.querySelector("#wasm-hint-text")
 const resultsContainer = document.querySelector("#results-container")
+
+const showHome = () => {
+    const startPage = document.querySelector("#start-page")
+    const tablePage = document.querySelector("#table-page")
+    const infoPage = document.querySelector("#info-page")
+    const homeImg = document.querySelector("#home-img")
+
+    tablePage.style.display = "none"
+    startPage.style.display = "flex"
+    infoPage.style.display = "none"
+    homeImg.style.display = "none"
+}
+
+const showInfo = () => {
+    const startPage = document.querySelector("#start-page")
+    const tablePage = document.querySelector("#table-page")
+    const infoPage = document.querySelector("#info-page")
+    const homeImg = document.querySelector("#home-img")
+
+    tablePage.style.display = "none"
+    startPage.style.display = "none"
+    infoPage.style.display = "block"
+    homeImg.style.display = "flex"
+}
+
+homeImg.addEventListener("click", () => {
+    showHome();
+})
 
 const markByTime = (time) => {
     return Math.round(Math.pow(1 / time, 0.8) * 10_000_000);

@@ -2,8 +2,11 @@ const md5 = function(d){var r = M(V(Y(X(d),8*d.length)));return r.toLowerCase()}
 
 const JSmd5Test = () => {
     const start = window.performance.now()
+
     const bibleHash = md5(bible)
+
     const end = window.performance.now()
+    
     return end - start
 }
 
